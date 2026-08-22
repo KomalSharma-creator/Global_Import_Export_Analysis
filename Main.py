@@ -10,7 +10,7 @@ st.set_page_config(
     layout='wide',
     initial_sidebar_state='expanded'
 )
-css = Path(r"C:\python DS10-12\komal\styling.css").read_text(encoding='utf-8')
+css = Path(r"styling.css").read_text(encoding='utf-8')
 st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
 df = pd.read_csv('Cleaned_dataset1.csv')
 df1 = pd.read_csv('Cleaned_dataset2.csv')
