@@ -1,0 +1,939 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* Main Canvas Background */
+.stApp {
+  background:
+radial-gradient(
+    ellipse at top,
+    #668A80 0%,
+    #52736A 18%,
+    #3F5F56 38%,
+    #2F4A43 65%,
+    #243B35 100%
+);
+    color: #f9fafd !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+
+/* Sidebar Dark Theme Override
+/* =========================================================
+   SIDEBAR TRANSPARENCY & PARTICLE ANIMATION FIX
+   ========================================================= */
+
+/* 1. Sidebar ke saare nested containers ko transparent karna */
+section[data-testid="stSidebar"],
+[data-testid="stSidebar"],
+[data-testid="stSidebarContent"],
+[data-testid="stSidebarNav"],
+[data-testid="stSidebar"] > div {
+    background-color: transparent !important;
+    background: transparent !important;
+}
+
+/* 2. Main App Canvas par Running Particles */
+.stApp {
+    background-color: #070b12 !important;
+    background-image: 
+        radial-gradient(2px 2px at 40px 60px, #38BDF8 100%, transparent),
+        radial-gradient(1.5px 1.5px at 120px 180px, #34D399 100%, transparent),
+        radial-gradient(2.5px 2.5px at 200px 90px, #ffffff 100%, transparent) !important;
+    background-repeat: repeat !important;
+    background-size: 350px 350px, 500px 500px, 250px 250px !important;
+    animation: moveStars 30s linear infinite !important;
+}
+
+@keyframes moveStars {
+    from {
+        background-position: 0 0, 0 0, 0 0;
+    }
+    to {
+        background-position: -500px 1000px, 500px -1000px, 0px 500px;
+    }
+}
+
+/* 3. Glassmorphism overlay sidebar ke liye (particles iske peeche se chalenge) */
+[data-testid="stSidebarContent"] {
+    background: rgba(11, 17, 24, 0.45) !important;
+    backdrop-filter: blur(10px) !important;
+    border-right: 1px solid rgba(56, 189, 248, 0.25) !important;
+}
+section[data-testid="stSidebar"] {
+    background: radial-gradient(
+    ellipse at top,
+    #668A80 0%,
+    #52736A 18%,
+    #3F5F56 38%,
+    #2F4A43 65%,
+    #243B35 100%
+);
+
+    border-right: 11px solid #9edcd7 !important;
+}
+
+section[data-testid="stSidebar"] * {
+    color: #fdfdfe !important;
+} */
+
+/* =========================
+   Executive Hero Banner
+========================= */
+
+.hero-banner {
+    background:
+    linear-gradient(
+        135deg,
+        #91beb2 0%,
+        #27443C 45%,
+        #2F5148 100%
+    );
+
+    border:1px solid rgba(34,197,94,.18);
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.30),
+        0 0 20px rgba(34,197,94,.08);
+    border-radius: 14px;
+    padding: 2rem 2.2rem;
+    color: #FFFFFF;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.35s ease;
+}
+
+/* Soft background glow */
+.hero-banner::before {
+    content: "";
+    position: absolute;
+    top: -40%;
+    right: -15%;
+    width: 280px;
+    height: 280px;
+    background: radial-gradient(circle,
+        rgba(56,189,248,0.12) 0%,
+        rgba(34,197,94,0.08) 45%,
+        transparent 75%);
+    pointer-events: none;
+}
+
+.hero-banner:hover {
+    transform: translateY(-8px);
+    box-shadow:#3A6F61
+        0 16px 30px rgb(152, 225, 237),
+        0 0 18px rgba(56,189,248,0.12);
+    border-color: rgba(56,189,248,0.35);
+}
+
+
+/* =========================
+   Hero Title
+========================= */
+
+.hero-title {
+    font-size: 1.95rem;
+    font-weight: 800;
+    color: #FFFFFF !important;
+    letter-spacing: -0.025em;
+    margin-bottom: 0.35rem;
+    transition: all 0.3s ease;
+    text-shadow:
+        0 0 8px rgba(56,189,248,0.35),
+        0 0 18px rgba(34,197,94,0.18);
+}
+
+.hero-banner:hover .hero-title {
+    color: #F8FAFC !important;
+    text-shadow:
+        0 0 10px rgba(56,189,248,0.55),
+        0 0 22px rgba(76, 244, 241, 0.868);
+}
+
+
+/* =========================
+   Hero Subtitle
+========================= */
+
+.hero-subtitle {
+    font-size: 1rem;
+    color: #CBD5E1;
+    font-weight: 400;
+    margin-bottom: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.hero-banner:hover .hero-subtitle {
+    color: #E2E8F0;
+}
+
+
+/* =========================
+   Hero Tags
+========================= */
+
+.hero-tags {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+
+/* =========================
+   Individual Tags
+========================= */
+
+.tag {
+    background: rgba(254, 250, 250, 0.95);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: #01080b;
+    padding: 0.4rem 0.9rem;
+    border-radius: 22px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    backdrop-filter: blur(6px);
+    transition: all 0.28s ease;
+}
+
+.tag:hover {
+    transform: translateY(-2px);
+    background: rgba(56,189,248,0.16);
+    border-color: rgba(56,189,248,0.45);
+    color: #FFFFFF;
+    box-shadow:
+        0 6px 18px rgba(56,189,248,0.18),
+        0 0 10px rgba(34,197,94,0.12);
+}
+
+/* Section Titles */
+.section-header {
+    color: #f5ffe4 !important;
+    font-size: 1.25rem !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.02em !important;
+    margin-top: 1.5rem !important;
+    margin-bottom: 1rem !important;
+}
+
+/* Executive Summary Box */
+.summary-box {
+    background: rgb(192, 245, 228);
+    border: 1px solid #E2E8F0;
+    border-left: 4px solid #2563EB;
+    border-radius: 8px;
+    padding: 1.15rem 1.4rem;
+    color: #334155;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    margin-bottom: 1.75rem;
+}
+.summary-box:hover{
+    transform: translateY(-4px);
+    background: rgb(201, 238, 164);
+    border-color: rgba(56,189,248,0.45);
+}
+
+/* Financial KPI Cards */
+.kpi-card {
+    background-color: #FFFFFF;
+    border: 1px solid #E2E8F0;
+     cursor:pointer;
+    transition: transform .35s ease,
+        box-shadow .35s ease,
+        border-color .35s ease;
+
+    border-radius: 10px;
+    padding: 1.25rem 1.4rem;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+    position: relative;
+    
+}
+
+
+
+.kpi-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+}
+
+.accent-blue::before { background-color: #2563EB; }
+.accent-emerald::before { background-color: #059669; }
+.accent-red::before { background-color: #DC2626; }
+.accent-gold::before { background-color: #D97706; }
+.accent-purple::before { background-color: #7C3AED; }
+.accent-slate::before { background-color: #475569; }
+
+.kpi-label {
+    color: #64748B;
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.5rem;
+}
+
+.kpi-value {
+    color: #0F172A;
+    font-size: 1.85rem;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.4rem;
+}
+.kpi-card:hover{
+
+    transform:translateY(-8px);
+
+    border-color:#2563EB;
+
+    box-shadow:
+
+        0 0 12px rgba(37,99,235,.35),
+
+        0 0 28px rgba(37,99,235,.18),
+
+        0 18px 35px rgba(15,23,42,.18);
+
+}
+.kpi-card:hover::before{
+
+    height:5px;
+
+    box-shadow:
+        0 0 8px currentColor,
+        0 0 18px currentColor;
+
+}
+.kpi-label{
+
+    transition:.3s ease;
+
+}
+.kpi-value{
+
+    transition:
+        color .3s ease,
+        transform .3s ease;
+
+}
+
+.kpi-card:hover .kpi-value{
+
+    color:#2563EB;
+
+    transform:scale(1.05);
+
+}
+.kpi-card:hover .kpi-label{
+
+    color:#0F172A;
+
+    letter-spacing:.08em;
+
+}
+.kpi-sub {
+    color: #94A3B8;
+    font-size: 0.78rem;
+    font-weight: 500;
+}
+/* Universal Chart Heading */
+
+.chart-title{
+    font-size:1.55rem;
+    font-weight:800;
+    color:#F8FAFC;
+    margin:18px 0 12px 0;
+    letter-spacing:-0.3px;
+    transition:.3s ease;
+
+    text-shadow:
+        0 0 6px rgba(52,211,153,.35),
+        0 0 12px rgba(34,197,94,.20);
+}
+
+.chart-title:hover{
+    color:#331414;
+
+    text-shadow:
+        0 0 10px rgba(52,211,153,.75),
+        0 0 20px rgba(34,197,94,.55);
+
+    letter-spacing:.4px;
+}
+/* Sidebar Inputs / Dropdowns */
+section[data-testid="stSidebar"] div[data-baseweb="select"] > div {
+    background-color: #1E293B !important;
+    border: 1px solid #334155 !important;
+    color: #FFFFFF !important;
+    border-radius: 6px !important;
+}
+
+section[data-testid="stSidebar"] label {
+    color: #2374d7 !important;
+    font-size: 0.825rem !important;
+    font-weight: 600 !important;
+}
+
+/* Footer Styling */
+.dashboard-footer {
+    text-align: center;
+    color: #e9e9f4;
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 2rem 0 1rem 0;
+    border-top: 1px solid #E2E8F0;
+    margin-top: 3rem;
+}
+.chart-card{
+    background: rgba(255,255,255,.06);
+    backdrop-filter: blur(12px);
+
+    border:2px solid rgba(56,189,248,.25);
+    border-radius:20px;
+
+    padding:18px;
+    margin:20px 0;
+
+    transition:border-color .3s ease, box-shadow .3s ease;
+
+    box-shadow:
+        0 8px 20px rgba(15,23,42,.15);
+}
+
+.chart-card:hover{
+
+    border-color:#020d12;
+
+    box-shadow:
+        0 0 8px rgba(1, 12, 16, 0.35),
+        0 0 18px rgba(2, 12, 17, 0.18);
+}
+/* ============================
+   Plotly Chart Card
+============================ */
+
+[data-testid="stPlotlyChart"]{
+
+    background: rgba(255,255,255,0.08);
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+
+    border: 2px solid rgba(56,189,248,.28);
+
+    border-radius: 22px;
+
+    padding: 18px;
+
+    overflow: hidden;
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease,
+        border-color .35s ease;
+
+    box-shadow:
+        0 8px 25px rgba(15,23,42,.18),
+        inset 0 0 8px rgba(255,255,255,.05);
+
+}
+.tariff-card{
+        background:white;
+        padding:22px;
+        border-radius:18px;
+        text-align:center;
+        border:1px solid #DCE6F2;
+        box-shadow:0 6px 18px rgba(0,0,0,.12);
+        height:135px;
+        transition:.3s;
+    }
+    .tariff-card:hover{
+        transform:translateY(-5px);
+    }
+    .tariff-title{
+        color:#666;
+        font-size:17px;
+        font-weight:600;
+    }
+    .tariff-value{
+        color:#1362EB;
+        font-size:32px;
+        font-weight:bold;
+        margin-top:12px;
+    }
+.trade-insight{
+        background:linear-gradient(135deg,#1362EB,#00B4D8);
+        color:white;
+        border-radius:18px;
+        padding:22px;
+        text-align:center;
+        height:170px;
+        box-shadow:0 6px 18px rgba(0,0,0,.18);
+    }
+    .trade-head{
+        font-size:18px;
+        font-weight:bold;
+        color:rgb(230, 255, 116);
+    }
+    .trade-body{
+        font-size:28px;
+        margin-top:14px;
+        font-weight:bold;
+    }
+    .trade-small{
+        font-size:15px;
+        margin-top:12px;
+
+    }
+
+    .export-card{
+        background:white;
+        padding:22px;
+        border-radius:18px;
+        text-align:center;
+        box-shadow:0px 6px 15px rgba(0,0,0,0.10);
+        border:1px solid #DCE6F2;
+        transition:0.3s;
+        height:135px;
+    }
+    .export-card:hover{
+        transform:translateY(-5px);
+        box-shadow:0px 10px 20px rgba(133, 237, 5, 0.902);
+    }
+    .export-title{
+        font-size:16px;
+        color:#360909;
+        font-weight:600;
+    }
+    .export-value{
+        font-size:34px;
+        font-weight:bold;
+        color:#1e13eb;
+        margin-top:12px;
+    }
+    
+.analytics-card{
+    background:linear-gradient(135deg,#23463D,#1B3530);
+    border:1px solid rgba(167,243,208,.22);
+    border-left:5px solid #22C55E;
+    border-radius:16px;
+    padding:18px;
+    min-height:120px;
+    box-shadow:0 8px 22px rgba(0,0,0,.18);
+    transition:.35s ease;
+}
+
+.analytics-card:hover{
+    transform:translateY(-5px);
+    border-color:#4ADE80;
+    box-shadow:
+        0 0 18px rgba(34,197,94,.35),
+        0 10px 25px rgba(0,0,0,.25);
+}
+
+.analytics-icon{
+    font-size:28px;
+    margin-bottom:8px;
+}
+
+.analytics-title{
+    color:#A7F3D0;
+    font-size:.82rem;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.analytics-value{
+    color:#F8FAFC;
+    font-size:1.65rem;
+    font-weight:800;
+    margin:8px 0 5px 0;
+}
+
+.analytics-sub{
+    color:#D1FAE5;
+    font-size:.82rem;
+}
+/* Hover */
+
+[data-testid="stPlotlyChart"]:hover{
+
+    transform: translateY(-4px);
+
+    border:5px solid #a2fdad;
+
+    box-shadow:
+
+        inset 0 0 15px rgba(59,130,246,.18),
+
+        0 0 10px #72ecff,
+
+        0 0 22px rgba(255, 252, 165, 0.85),
+
+        0 0 40px rgba(27, 231, 245, 0.847),
+
+        0 0 70px rgba(37,99,235,.35);
+
+}
+/* Hide radio circle */
+.stRadio input[type="radio"]{
+    display:none;
+}
+
+/* Radio labels */
+.stRadio label{
+
+    width:100%;
+
+    padding:10px 14px;
+
+    margin:5px 0;
+
+    border-radius:10px;
+
+    color:#F1F5F9;
+
+    background:transparent;
+
+    transition:.3s ease;
+
+    cursor:pointer;
+
+    font-weight:500;
+
+}
+
+/* Hover */
+.stRadio label:hover{
+
+    background:#23463D;
+
+    color:white;
+
+}
+
+/* Selected */
+.stRadio input:checked + div{
+
+    background:#166534 !important;
+
+    border-radius:10px;
+
+    color:white !important;
+
+    font-weight:700;
+
+}
+    .insight-card{
+
+        background:linear-gradient(135deg,#1362EB,#00B4D8);
+        color:white;
+        padding:22px;
+        border-radius:18px;
+        text-align:center;
+        box-shadow:0 6px 18px rgba(0,0,0,.18);
+        height:170px;
+
+    }
+
+    .insight-title{
+
+        font-size:18px;
+        font-weight:600;
+
+    }
+
+    .insight-value{
+
+        font-size:28px;
+        font-weight:bold;
+        margin-top:15px;
+
+    }
+
+    .insight-text{
+
+        margin-top:10px;
+        font-size:15px;
+
+    }
+ /* ============================
+   KPI Cards Visibility Fix
+============================ */
+.kpi-card {
+    background: #1E293B; /* solid dark card background */
+    border: none !important;
+    border-radius: 14px;
+    padding: 1.5rem;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+    transition: transform .35s ease, box-shadow .35s ease;
+    cursor: pointer;
+}
+
+/* KPI Label */
+.kpi-label {
+    color: #E2E8F0; /* light gray for visibility */
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.5rem;
+    transition: color .3s ease;
+}
+
+.kpi-card:hover .kpi-label {
+    color: #F8FAFC; /* bright white on hover */
+}
+
+/* KPI Value */
+.kpi-value {
+    color: #F9FAFB; /* bright white text */
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.4rem;
+    text-shadow: 0 0 6px rgba(56,189,248,.35);
+    transition: color .3s ease, transform .3s ease;
+}
+
+.kpi-card:hover .kpi-value {
+    color: #38BDF8; /* glowing blue on hover */
+    transform: scale(1.08);
+}
+
+/* KPI Subtext */
+.kpi-sub {
+    color: #CBD5E1; /* lighter gray for visibility */
+    font-size: 0.78rem;
+    font-weight: 500;
+}
+
+
+/* ============================
+   Unified Card Styling
+============================ */
+.kpi-card,
+.tariff-card,
+.export-card,
+.analytics-card,
+.trade-insight,
+.geo-card,
+.insight-card {
+    background: #1E293B; /* dark solid background */
+    border: none !important;
+    border-radius: 14px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+    transition: transform .35s ease, box-shadow .35s ease;
+    color: #F9FAFB; /* bright text */
+    cursor: pointer;
+}
+
+.kpi-card:hover,
+.tariff-card:hover,
+.export-card:hover,
+.analytics-card:hover,
+.trade-insight:hover,
+.geo-card:hover,
+.insight-card:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 
+        0 0 18px rgba(56,189,248,.35),
+        0 0 28px rgba(34,197,94,.25),
+        0 20px 40px rgba(15,23,42,.25);
+}
+
+/* Titles inside cards */
+.kpi-label,
+.tariff-title,
+.export-title,
+.analytics-title,
+.trade-head,
+.geo-title,
+.insight-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #E2E8F0; /* visible light gray */
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+/* Values inside cards */
+.kpi-value,
+.tariff-value,
+.export-value,
+.analytics-value,
+.trade-body,
+.geo-value,
+.insight-value {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #F9FAFB; /* bright white */
+    text-shadow: 0 0 6px rgba(56,189,248,.35);
+}
+
+/* Subtext inside cards */
+.kpi-sub,
+.trade-small,
+.analytics-sub,
+.insight-text {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: #CBD5E1; /* lighter gray for visibility */
+}
+
+/* ============================
+   Headings Visibility Upgrade
+============================ */
+.section-header,
+.chart-title,
+.hero-title {
+    color: #F8FAFC !important; /* bright white */
+    text-shadow: 0 0 6px rgba(56,189,248,.35);
+    font-weight: 800;
+}
+
+.section-header:hover,
+.chart-title:hover,
+.hero-title:hover {
+    color: #38BDF8 !important; /* glowing blue highlight */
+    text-shadow: 
+        0 0 10px rgba(56,189,248,.55),
+        0 0 20px rgba(34,197,94,.45);
+}
+
+/* ============================
+   Download Button Styling
+============================ */
+.stDownloadButton > button {
+    background: linear-gradient(135deg, #1362EB, #00B4D8) !important; /* blue gradient */
+    color: #FFFFFF !important; /* bright white text */
+    font-weight: 700 !important;
+    border: none !important;
+    border-radius: 10px !important;
+    padding: 10px 18px !important;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+    transition: transform .3s ease, box-shadow .3s ease;
+    cursor: pointer;
+}
+
+.stDownloadButton > button:hover {
+    transform: translateY(-3px);
+    box-shadow: 
+        0 0 12px rgba(56,189,248,.45),
+        0 0 20px rgba(34,197,94,.25);
+}
+
+
+
+/* Particle-like glowing dots */
+.stApp {
+    background-color: #0b1c2c;
+    background-image:
+        radial-gradient(circle, rgba(0,191,255,0.25) 2px, transparent 2px),
+        radial-gradient(circle, rgba(255,140,0,0.25) 2px, transparent 2px);
+    background-size: 80px 80px, 120px 120px;
+    animation: drift 40s linear infinite;
+}
+
+@keyframes drift {
+    from { background-position: 0 0, 0 0; }
+    to { background-position: 80px 80px, -120px 120px; }
+}
+/* =========================================================
+   GUARANTEED LIVE PARTICLE ANIMATION (SIDEBAR + MAIN)
+   ========================================================= */
+@keyframes moveStars {
+    from {
+        background-position: 0 0, 0 0, 0 0;
+    }
+    to {
+        background-position: -500px 1000px, 500px -1000px, 0px 500px;
+    }
+}
+
+/* Main app live moving starfield */
+.stApp {
+    background-color: #070b12 !important;
+    background-image: 
+        radial-gradient(2px 2px at 40px 60px, #38BDF8 100%, transparent),
+        radial-gradient(1.5px 1.5px at 120px 180px, #34D399 100%, transparent),
+        radial-gradient(2.5px 2.5px at 200px 90px, #ffffff 100%, transparent) !important;
+    background-repeat: repeat !important;
+    background-size: 350px 350px, 500px 500px, 250px 250px !important;
+    animation: moveStars 30s linear infinite !important;
+}
+
+/* Transparent Sidebar so particles flow behind it */
+[data-testid="stSidebar"] {
+    background: rgba(11, 17, 24, 0.6) !important;
+    backdrop-filter: blur(10px) !important;
+    border-right: 1px solid rgba(56, 189, 248, 0.2);
+}
+
+/* Base style for headings */
+h1, h2, h3, h4, h5, h6 {
+    color: #F8FAFC !important;
+    font-family: 'Inter', sans-serif;
+}
+
+/* =========================================================
+   GLOWING CARDS & HERO BANNERS
+   ========================================================= */
+
+.hero-banner {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.85));
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    box-shadow: 0 0 25px rgba(56, 189, 248, 0.18), inset 0 0 15px rgba(56, 189, 248, 0.08);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+    backdrop-filter: blur(12px);
+}
+
+.hero-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #38BDF8 !important;
+    text-shadow: 0 0 14px rgba(56, 189, 248, 0.6);
+}
+
+.section-header, .chart-title {
+    color: #38BDF8 !important;
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+    font-weight: 700;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+.kpi-card, .summary-box, .analytics-card, .export-card, 
+.trade-insight, .insight-card, .geo-insight {
+    background: rgba(15, 23, 42, 0.75) !important;
+    border: 1px solid rgba(56, 189, 248, 0.3) !important;
+    border-radius: 14px !important;
+    padding: 18px !important;
+    box-shadow: 0 0 18px rgba(56, 189, 248, 0.12) !important;
+    transition: all 0.3s ease-in-out !important;
+    backdrop-filter: blur(8px);
+}
+
+.kpi-card:hover, .analytics-card:hover, .export-card:hover, 
+.trade-insight:hover, .insight-card:hover, .geo-insight:hover {
+    border-color: #38BDF8 !important;
+    box-shadow: 0 0 25px rgba(56, 189, 248, 0.4) !important;
+    transform: translateY(-3px);
+}
+
+.kpi-value, .export-value, .analytics-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #F8FAFC !important;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}
