@@ -1,4 +1,5 @@
 import streamlit as st
+import requests
 import pandas as pd
 import plotly.express as px
 from streamlit_option_menu import option_menu
@@ -1412,7 +1413,7 @@ elif page == "🛃 Tariff Analysis":
         geo=dict(showframe=False, showcoastlines=True, projection_type="natural earth")
     )
     show_chart(fig)
-        col1, col2 = st.columns(2)
+    col1, col2 = st.columns(2)
     with col1:
         st.subheader("📦 Tariff Distribution by Income Group")
         fig = px.box(
