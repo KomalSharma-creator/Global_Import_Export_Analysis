@@ -828,51 +828,6 @@ elif page == "📤 Export Analytics":
             title_font=dict(size=20, color="#00BFFF")
         )
         show_chart(fig)
-    with col1:
-        st.subheader("📉 Export Value Distribution")
-        fig = px.histogram(
-            filtered,
-            x="Export_Value",
-            nbins=35,
-            color_discrete_sequence=["#062A26"]
-        )
-        fig.update_traces(
-            hovertemplate="Export Value: %{x:,.0f}<br>Frequency: %{y}"
-        )
-        fig.update_layout(
-            plot_bgcolor="#1E1E2F",
-            paper_bgcolor="#121212",
-            font=dict(color="white"),
-            title="Distribution of Export Values",
-            title_font=dict(size=20, color="#FF6F61"),
-            xaxis_title="Export Value",
-            yaxis_title="Frequency",
-            height=450
-        )
-        show_chart(fig)
-    with col2:
-        st.subheader("🔵 Import vs Export")
-        fig = px.scatter(
-            filtered,
-            x="Import_Value",
-            y="Export_Value",
-            color="Continent",
-            size="Export_Value",
-            hover_name="Country",
-            hover_data=["Year"],
-            opacity=0.75,
-            color_discrete_sequence=px.colors.qualitative.Set3
-        )
-        fig.update_traces(
-            hovertemplate="<b>%{hovertext}</b><br>Year: %{customdata[0]}<br>Import: %{x:,.0f}<br>Export: %{y:,.0f}"
-        )
-        fig.update_layout(
-            paper_bgcolor="#121212",
-            plot_bgcolor="#1E1E2F",
-            font=dict(color="white"),
-            title_font=dict(size=20, color="#32CD32")
-        )
-        show_chart(fig)
     st.markdown("---")
     st.subheader("💡 Key Export Insights")
     highest_country = (
@@ -1457,41 +1412,7 @@ elif page == "🛃 Tariff Analysis":
         geo=dict(showframe=False, showcoastlines=True, projection_type="natural earth")
     )
     show_chart(fig)
-    col1, col2 = st.columns(2)
-    with col1:
-        st.subheader("🌳 MFN Tariff Treemap")
-        tree = (
-            filtered.groupby("Country")["MFN Simple Average (%)"]
-            .mean()
-            .reset_index()
-        )
-        fig = px.treemap(
-            tree,
-            path=["Country"],
-            values="MFN Simple Average (%)",
-            color="MFN Simple Average (%)",
-            color_continuous_scale="YlGnBu" 
-        )
-        fig.update_layout(template="plotly_white", plot_bgcolor="#FFFFFF", paper_bgcolor="#FFFFFF", height=520)
-        show_chart(fig)
-    with col2:
-        st.subheader("🥧 Average AHS Tariff by Continent")
-        ahs_continent = (
-            filtered.groupby("Continent")["AHS Simple Average (%)"]
-            .mean()
-            .reset_index()
-        )
-        fig = px.pie(
-            ahs_continent,
-            names="Continent",
-            values="AHS Simple Average (%)",
-            hole=0.55,
-            color_discrete_sequence=px.colors.qualitative.Set3   # bright pastel set
-        )
-        fig.update_layout(template="plotly_white", plot_bgcolor="#FFFFFF", paper_bgcolor="#FFFFFF", height=520)
-        show_chart(fig)
-    st.markdown("---")
-    col1, col2 = st.columns(2)
+        col1, col2 = st.columns(2)
     with col1:
         st.subheader("📦 Tariff Distribution by Income Group")
         fig = px.box(
@@ -1515,28 +1436,20 @@ elif page == "🛃 Tariff Analysis":
         )
         show_chart(fig)
     with col2:
-        st.subheader("🔵 MFN Tariff vs Export Value")
-        fig = px.scatter(
-            filtered,
-            x="MFN Simple Average (%)",
-            y="Export_Value",
-            color="Continent",
-            size="Import_Value",
-            hover_name="Country",
-            hover_data=["Year"],
-            opacity=0.75,
-            color_discrete_sequence=px.colors.qualitative.Set2   # bright categorical colors
+        st.subheader("🥧 Average AHS Tariff by Continent")
+        ahs_continent = (
+            filtered.groupby("Continent")["AHS Simple Average (%)"]
+            .mean()
+            .reset_index()
         )
-        fig.update_layout(
-            template="plotly_white",
-            plot_bgcolor="#FFFFFF",
-            paper_bgcolor="#FFFFFF",
-            height=500,
-            title="Tariff vs Export Performance",
-            title_x=0.25,
-            xaxis_title="MFN Tariff (%)",
-            yaxis_title="Export Value"
+        fig = px.pie(
+            ahs_continent,
+            names="Continent",
+            values="AHS Simple Average (%)",
+            hole=0.55,
+            color_discrete_sequence=px.colors.qualitative.Set3   # bright pastel set
         )
+        fig.update_layout(template="plotly_white", plot_bgcolor="#FFFFFF", paper_bgcolor="#FFFFFF", height=520)
         show_chart(fig)
     st.markdown("---")
     st.subheader("💡 Tariff Insights")
@@ -2295,31 +2208,6 @@ elif page == "📙 Dataset":
     st.dataframe(info, use_container_width=True)
     st.subheader("📊 Statistical Summary")
     st.dataframe(display_df.describe(include="all"), use_container_width=True)
-    st.subheader("❗ Missing Values")
-    missing = display_df.isnull().sum().reset_index()
-    missing.columns = ["Column", "Missing Values"]
-    fig = px.bar(
-        missing,
-        x="Missing Values",
-        y="Column",
-        orientation="h",
-        color="Missing Values",
-        color_continuous_scale="Reds",
-        title="Missing Values by Column"
-    )
-    fig.update_layout(template="plotly_white", height=500, title_x=0.5)
-    show_chart(fig)
-    st.subheader("🔥 Correlation Heatmap")
-    numeric_df = display_df.select_dtypes(include="number")
-    if numeric_df.shape[1] > 1:
-        fig = px.imshow(
-            numeric_df.corr(),
-            text_auto=".2f",
-            color_continuous_scale="RdBu_r",
-            aspect="auto"
-        )
-        fig.update_layout(template="plotly_white", height=650, title="Correlation Matrix", title_x=0.5)
-        show_chart(fig)
 
     st.subheader("💡 Dataset Insights")
     a, b = st.columns(2)
@@ -2414,58 +2302,25 @@ elif page == "⚙️ Pre Processing":
         else:
             st.error("Dataset requires further cleaning.")
     st.markdown("---")
-    st.subheader("❗ Missing Values Analysis")
-    missing_df = merged.isnull().sum().reset_index()
-    missing_df.columns = ["Column", "Missing Values"]
-    missing_df = missing_df[missing_df["Missing Values"] > 0]
-    if len(missing_df) > 0:
-        with st.container():
-            st.markdown('<div class="chart-card">', unsafe_allow_html=True)
-            missing_df = merged.isnull().sum().reset_index()
-            missing_df.columns = ["Column", "Missing Values"]
-            fig = px.bar(
-                missing_df,
-                x="Column",
-                y="Missing Values",
-                color="Missing Values",
-                text="Missing Values",
-                color_continuous_scale="Reds",
-                title="Missing Values by Column"
-            )
-            fig.update_layout(template="plotly_white", height=500, title_x=0.25, coloraxis_showscale=False)
-            fig.update_traces(textposition="outside")
-            show_chart(fig)
-            st.markdown('</div>', unsafe_allow_html=True)
-    else:
-        st.success("✅ No Missing Values Found in Dataset")
+
     st.markdown("---")
     st.subheader("📊 Data Types & Missing Value Pattern")
-    left, right = st.columns(2)
-    with left:
-        st.markdown('<div class="chart-card">', unsafe_allow_html=True)
-        dtype_df = merged.dtypes.astype(str).value_counts().reset_index()
-        dtype_df.columns = ["Data Type", "Count"]
-        fig = px.pie(
-            dtype_df,
+    # left, right = st.columns(2)
+    # with left:
+    st.markdown('<div class="chart-card">', unsafe_allow_html=True)
+    dtype_df = merged.dtypes.astype(str).value_counts().reset_index()
+    dtype_df.columns = ["Data Type", "Count"]
+    fig = px.pie(
+        dtype_df,
             names="Data Type",
             values="Count",
             hole=0.55,
             title="Column Data Types",
             color_discrete_sequence=px.colors.qualitative.Set2
         )
-        fig.update_layout(template="plotly_white", height=500, title_x=0.25)
-        show_chart(fig)
-        st.markdown('</div>', unsafe_allow_html=True)
-    with right:
-        st.markdown('<div class="chart-card">', unsafe_allow_html=True)
-        fig = px.imshow(
-            merged.isnull(),
-            aspect="auto",
-            color_continuous_scale=["#FFFFFF", "#1362EB"]
-        )
-        fig.update_layout(template="plotly_white", title="Missing Value Heatmap", title_x=0.25, height=500, coloraxis_showscale=False)
-        show_chart(fig)
-        st.markdown('</div>', unsafe_allow_html=True)
+    fig.update_layout(template="plotly_white", height=500, title_x=0.25)
+    show_chart(fig)
+    st.markdown('</div>', unsafe_allow_html=True)
     st.markdown("---")
     st.subheader("🧹 Data Cleaning Pipeline")
     pipeline = [
@@ -2625,34 +2480,81 @@ elif page == "👤 About":
     st.success("🎉 Thank you for exploring the World Import & Export Trade Analysis Dashboard!")
     st.markdown("<div class='dashboard-footer'>© 2026 | Developed using Streamlit & Plotly</div>", unsafe_allow_html=True)
 
-    import streamlit as st
-    from openai import OpenAI
-    with st.sidebar:
-        api_key = st.text_input("OpenAI API Key", type="password")
 elif page == "🤖 ChatBot":
-    st.title("Chat bot")
-    if "messages" not in st.session_state:
-        st.session_state.messages = []
-    for message in st.session_state.messages:
-        with st.chat_message(message["role"]):
-            st.markdown(message["content"])
-    if prompt := st.chat_input("How can I help you?"):
-        if not api_key:
-            st.warning("Please enter your API key in the sidebar.")
-            st.stop()
-        st.session_state.messages.append({"role": "user", "content": prompt})
-        with st.chat_message("user"):
-            st.markdown(prompt)
-        client = OpenAI(api_key=api_key)
-        with st.chat_message("assistant"):
-            response = client.chat.completions.create(
-                model="gpt-4o-mini",
-                messages=[
-                    {"role": m["role"], "content": m["content"]}
-                    for m in st.session_state.messages
-                ]
-            )
-            reply = response.choices[0].message.content
-            st.markdown(reply)
-        st.session_state.messages.append({"role": "assistant", "content": reply})
-        
+  st.markdown(
+      """
+    <div class="hero-banner">
+        <h1>💬 Global Trade AI Assistant</h1>
+        <p>Ask questions about your dataset, trade policies, shipping routes, or international economics powered by your custom RapidAPI integration.</p>
+    </div>
+    """,
+      unsafe_allow_html=True,
+  )
+
+  # Initialize chat history state
+  if "chat_messages" not in st.session_state:
+    st.session_state.chat_messages = []
+
+  # Display existing chat messages
+  for message in st.session_state.chat_messages:
+    with st.chat_message(message["role"]):
+      st.markdown(message["content"])
+
+  # Chat input element
+  if user_query := st.chat_input(
+      "Ask anything about global trade, tariffs, or dataset insights..."
+  ):
+    # Append user message
+    st.session_state.chat_messages.append(
+        {"role": "user", "content": user_query}
+    )
+    with st.chat_message("user"):
+      st.markdown(user_query)
+
+    # API Configuration mapping your code snippet
+    url = "https://chatgpt-42.p.rapidapi.com/conversationgpt4-2"
+    payload = {
+        "messages": [
+            {"role": m["role"], "content": m["content"]}
+            for m in st.session_state.chat_messages
+        ],
+        "system_prompt": (
+            "You are an expert AI assistant embedded in the World Import &"
+            " Export Trade Analysis Dashboard created by Komal Sharma. Help"
+            " users interpret trade data, tariffs, and global market insights."
+        ),
+        "temperature": 0.7,
+        "top_k": 5,
+        "top_p": 0.9,
+        "max_tokens": 256,
+        "web_access": False,
+    }
+    headers = {
+        "x-rapidapi-key": (
+            "42784e073bmsh1a02e4756a4c90ep1d815cjsn6f3edad7e95d"
+        ),
+        "x-rapidapi-host": "chatgpt-42.p.rapidapi.com",
+        "Content-Type": "application/json",
+    }
+
+    # Fetch response from RapidAPI endpoint
+    with st.chat_message("assistant"):
+      with st.spinner("Analyzing trade metrics..."):
+        try:
+          response = requests.post(url, json=payload, headers=headers)
+          res_data = response.json()
+
+          # Safely parse text response from API structural variations
+          if "result" in res_data:
+            bot_reply = res_data["result"]
+          elif "message" in res_data:
+            bot_reply = res_data["message"]
+          else:
+            bot_reply = str(res_data)
+
+          st.markdown(bot_reply)
+          st.session_state.chat_messages.append(
+              {"role": "assistant", "content": bot_reply}
+          )
+        except Exception as e:
+          st.error(f"Error communicating with AI service: {e}")
